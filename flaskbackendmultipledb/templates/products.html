@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+<body>
+    {% if new_product %}
+    <div><h1 style="color:green;">New Product "{{ new_product }}" successfully added </h1></div>
+    {% endif %}
+
+    {% if modified_product %}
+    <div><h1 style="color:blue;">Product "{{ modified_product }}" has been successfully modified </h1></div>
+    {% endif %}
+
+    {% if deleted_product %}
+    <div><h1 style="color:red;">Product "{{ deleted_product }}" has been successfully removed </h1></div>
+    {% endif %}
+
+    <h1>Users from database {{ database }} and table {{ table }}</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Product Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for products in q %}
+            <tr>
+                <td>{{ products.product_id }}</td>
+                <td>{{ products.product_name }}</td>
+                <td>{{ products.product_description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<h3 style="color:green;"> ********************* </h3>
+<h3 style="color:green;" >Add a New Product</h3>
+<form method="POST" style="display:inline;">
+    <div class="mb-3">
+        <input type="hidden" name="action" value="add">
+        <label for="product_name" class="form-label">Product Name</label>
+        <input type="text" class="form-control" name="product_name" id="product_name" required><br><br>
+        <label for="product_description" class="form-label">Product Description</label>
+        <input type="text" class="form-control" name="product_description" id="product_description" required><br><br>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Product</button>
+</form>
+
+</form>
+<!-- Modify Form action="{{ url_for('sqlregionalproductslist') }}"  -->
+<h3 style="color:blue;"> ********************* </h3>
+<h3 style="color:blue;">Modify existing Product</h3>
+<form method="POST" style="display:inline;">
+    <input type="hidden" name="action" value="modify"> 
+    <label for="product_name" class="form-label">Existing Product Name</label>
+    <input type="text" name="product_name" placeholder="Product name" id="product_name" required><br><br>
+    <label for="product_description" class="form-label">Product Description</label>
+    <input type="text" name="product_description" placeholder="New description for product" id="product_description" required> <br><br>
+    
+    <button class="btn btn-warning btn-sm">Modify</button>
+</form>
+<!-- Delete Form -->
+<h3 style="color:red;"> ********************* </h3>
+<h3 style="color: red;">Delete an Existing Product</h3>
+<form method="POST">
+    <input type="hidden" name="action" value="delete">
+    <label for="product_name" class="form-label">Existing Product Name</label>
+    <input type="text" name="product_name" placeholder="Product Name" id="product_name" required> <br><br>
+    <button class="btn btn-danger btn-sm">Delete</button>
+</form>
+    <br>
+</body>
+</html>

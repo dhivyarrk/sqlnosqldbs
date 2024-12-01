@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+<body>
+    {% if new_user %}
+    <div><h1 style="color:red;">New User "{{ new_user }}" successfully added to database </h1></div>
+    {% endif %}
+    <h1>Users from database {{ database }} and table {{ table }}</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Join Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in q %}
+            <tr>
+                <td>{{ user.user_id }}</td>
+                <td>{{ user.user_name }}</td>
+                <td>{{ user.join_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 style="color:blue;"> ********************* </h3>
+    <h3 style="color:blue;" >Add a New User</h3>
+<form method="POST">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" name="name" id="name" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add User</button>
+</form>
+
+    <br>
+</body>
+</html>

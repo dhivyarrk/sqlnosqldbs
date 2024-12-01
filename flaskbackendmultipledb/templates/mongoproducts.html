@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+<body>
+    {% if new_product %}
+    <div><h1 style="color:green;">New Product "{{ new_product }}" successfully added </h1></div>
+    {% endif %}
+
+    {% if modified_product %}
+    <div><h1 style="color:blue;">Product "{{ modified_product }}" has been successfully modified </h1></div>
+    {% endif %}
+
+    {% if deleted_product %}
+    <div><h1 style="color:red;">Product "{{ deleted_product }}" has been successfully removed </h1></div>
+    {% endif %}
+
+    <h2>MongoDB REGIONAL PRODUCTS</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Product Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product._id }}</td>
+                <td>{{ product.product_name }}</td>
+                <td>{{ product.product_description }}</td>
+                <td>
+                    <form method="POST" style="display:inline;">
+                        <input type="hidden" name="action" value="modify"> 
+                        <input type="hidden" name="product_name" value="{{ product.product_name }}">
+                        <input type="text" name="product_description" placeholder="New description for product" id="product_description" required>      
+                        <button class="btn btn-warning btn-sm" style="color:blue;">Modify Description</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="POST">
+                        <input type="hidden" name="action" value="delete">
+                        <input type="hidden" name="product_name" value="{{ product.product_name }}">
+                        <button class="btn btn-danger btn-sm" style="color:red;">Delete</button>
+                    </form>                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<h3 style="color:green;" >Add a New Mongo DB Regional Product</h3>
+<form method="POST" style="display:inline;">
+    <div class="mb-3">
+        <input type="hidden" name="action" value="add">
+        <label for="product_id" class="form-label">Product Id</label>
+        <input type="int" class="form-control" name="product_id" id="product_id" required><br><br>
+        
+        <label for="product_name" class="form-label">Product Name</label>
+        <input type="text" class="form-control" name="product_name" id="product_name" required><br><br>
+        <label for="product_description" class="form-label">Product Description</label>
+        <input type="text" class="form-control" name="product_description" id="product_description" required><br><br>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="color:green;">Add Product</button>
+</form>
+    <br>
+</body>
+</html>

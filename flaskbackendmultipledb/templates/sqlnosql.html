@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+<body>
+    <h1 style="color: purple;">Combined Regional Products from Postgres and Mongo DB</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Postgres Product Name</th>
+                <th>Postgres Product Description</th>
+                <th>MongoDB Product Name</th>
+                <th>MongoDB Product Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product._id }}</td>
+                <td>{{ product.postgres_product_name }}</td>
+                <td>{{ product.postgres_product_description }}</td>
+                <td>{{ product.mongodb_product_name }}</td>
+                <td>{{ product.mongodb_product_description }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+    </html>
+    

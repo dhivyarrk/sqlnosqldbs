@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+<body>
+    {% if new_user %}
+    <div><h1 style="color:green;">New User "{{ new_user }}" successfully added </h1></div>
+    {% endif %}
+<h2>MongoDB Users</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>User Id</th>
+            <th>User Name</th>
+            <th>Join Date</th>
+            <th> Actions </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user._id }}</td>
+            <td>{{ user.user_name }}</td>
+            <td>{{ user.join_date }}</td>
+            <td>
+                <!-- Modify Form -->
+                <form method="POST" style="display:inline;">
+                    <input type="hidden" name="name" value="{{ user.name }}">
+                    <input type="hidden" name="action" value="modify">
+                    <input type="number" name="age" placeholder="New name" required>
+                    <button class="btn btn-warning btn-sm">Modify</button>
+                </form>
+                <!-- Delete Form -->
+                <form method="POST" style="display:inline;">
+                    <input type="hidden" name="name" value="{{ user.name }}">
+                    <input type="hidden" name="action" value="delete">
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Add a New Mongo User</h3>
+<form method="POST" >   
+    <div class="mb-3">
+        
+        <input type="hidden" name="action" value="add">
+        <label for="user_id" class="form-label">User Id</label>
+        <input type="int" class="form-control" name="user_id" id="user_id" required><br><br>
+        
+        <label for="user_name" class="form-label">User Name</label>
+        <input type="text" class="form-control" name="user_name" id="user_name" required><br><br>
+        <button type="submit" class="btn btn-primary">Add User</button>
+    </div>
+</form>
+</body>
+</html>
