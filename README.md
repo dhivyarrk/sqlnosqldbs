@@ -101,3 +101,9 @@ sudo systemctl daemon-reload
 sudo systemctl status mongod
 
 
+
+***************************
+
+To get joins of tables from both database
+
+http://127.0.0.1:5000/sqlnosql/combinedregionalproducts
